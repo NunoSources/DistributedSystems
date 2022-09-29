@@ -1,0 +1,48 @@
+// Grupo 14
+// Alexandre Torrinha fc52757
+// Nuno Fontes fc46413
+// Rodrigo Simões fc52758
+
+syntax = "proto3";
+message entry_m {
+  string key = 1;
+  data_m data = 2;
+};
+
+message data_m {
+  sint32 datasize = 1;
+  bytes data = 2;
+};
+
+message message_t
+{
+        enum Opcode {
+                OP_BAD     = 0;
+                OP_SIZE    = 10;
+                OP_DEL     = 20;
+                OP_GET     = 30;
+                OP_PUT     = 40;
+                OP_GETKEYS = 50;
+	        OP_HEIGHT  = 60;
+	        OP_VERIFY  = 70;
+                OP_ERROR   = 99;
+        }
+        Opcode opcode = 1;
+
+        enum C_type {
+                CT_BAD    = 0;
+                CT_KEY    = 10;
+                CT_VALUE  = 20;
+                CT_ENTRY  = 30;
+                CT_KEYS   = 40;
+                CT_RESULT = 50;
+                CT_NONE   = 60;
+        }
+        C_type c_type = 2;
+
+        sint32 data_size = 3;
+
+        repeated string data = 4;
+
+        entry_m entry = 5;
+};
